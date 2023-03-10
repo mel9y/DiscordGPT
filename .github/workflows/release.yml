@@ -35,10 +35,10 @@ jobs:
           context: .
           push: true
           labels: |
-            org.opencontainers.image.source = https://github.com/${{ github.repository }}
+            org.opencontainers.image.source = https://github.com/mel9y/discordgpt
           tags: |
-            ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ github.event.inputs.version }}
+            ghcr.io/mel9y/discordgpt:latest
+            ghcr.io/mel9y/discordgpt:${{ github.event.inputs.version }}
 
   release:
     name: Release Tag
