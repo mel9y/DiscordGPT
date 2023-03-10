@@ -1,47 +1,48 @@
-# template.deno.land
+# DiscordGPT
 
-Template repository for immediate deployment of Deno projects
+ChatGPT と Discord Bot を通して会話できます。
 
----
+## TODO
 
-[Install Deno](https://github.com/denoland/deno#install)
+- [ ] コードの最適化
+- [ ] 2000文字以上の応答が帰ってきた際にテキストファイルとして送信する
 
-1. Go to [code](https://github.com/m2en/template.deno.land) page
-2. Click on **use this template**
-3. Enjoy coding 🙂
+## 注意
 
-----
+- 元々自分用に作ったBotなので、***かなり*** 不十分です。
+  - OpenAI API 側との応答は問題なく行えます。
+- 100文字以上のメッセージは ChatGPT に送れないようにしています。
+  - あなたの財布を守るためです。
+- Discord API の仕様上、 2000文字を超えるメッセージは送信できないため、ChatGPTの応答が2000文字以上だった場合はメッセージを送らず無視します。
+  - これは今後、制限を回避してテキストファイルとして送信するよう変更する予定です。
 
-Deno Tasks are like scripts available in `deno task`
+## 使い方
 
-It is the same as `npm run` or something like that.
-
-```json
-  "tasks": {
-    "start": "deno run src/mod.ts",
-    "dev": "deno run --watch src/mod.ts",
-    "fmt": "deno fmt --watch src/",
-    "fmt:check": "deno fmt --check",
-    "lint": "deno lint",
-    "lint:json": "deno lint --json",
-    "cache": "deno cache deps.ts"
-  }
+```shell
+<@BotのID> [メッセージ内容...]
 ```
 
-- `start`: `deno task start`
-  - Run `src/mod.ts`
-- `dev`: `deno task dev`
-  - Run `src/mod.ts` (Development Mode)
-  - Re-run each time the file is updated
-- `fmt`: `deno task fmt`
-  - Run **deno fmt**
-  - Re-run each time the file is updated
-- `fmt:check`: `deno task fmt:check`
-  - Run **deno fmt** (check mode)
-- `lint`: `deno task lint`
-  - Run **deno lint**
-- `lint:json`: `deno task lint:json`
-  - Run **deno lint** (json mode)
-    - Execution results are output as JSON
-- `cache`: `deno task cache`
-  - Perform dependency caching for deps.ts
+- メッセージ内容ではスペース、改行を使用できます。
+- 写真等の添付ファイルは OpenAI API 側に送信されないので使えません。
+- **100文字以上のメッセージ送信はできません**
+  - 100文字以上のメッセージを送信したいときは API を使わず、従来の [ChatGPT (Free Reseatch Preview)](https://chat.openai.com/chat) を使ってください。
+- 使用しているモデルは `gpt-3.5-turbo` です。
+
+詳しい詳細: [Chat completions - OpenAI Documention](https://platform.openai.com/docs/guides/chat)
+
+## 環境変数
+
+**DiscordGPT を使用するには OpenAI API の API Key が必要です** (当たり前ですが、 Discord API のトークンも必要です。)
+
+[Billing overview - OpenAI API](https://platform.openai.com/account/billing/overview) から支払い方法を設定して **API Key を発行してください**。
+
+また、 OpenAI API は使用した分請求される方式です。Discord Botなどの不特定多数が触れるようなもので使用する際は制限をかけることをおすすめします。
+
+なお 現在APIで使用できるモデルは ChatGPT で使用されているモデル `gpt-3.5-turbo` のみ選択でき、1k (1000) トークンあたり `$0.002` 程度です。
+
+詳しくは [Pricing - OpenAI](https://openai.com/pricing) の Faq を確認してください。
+
+| 変数名 | 説明 |
+| ----- | ----- |
+| `DISCORD_TOKEN`   | Discord API のトークン |
+| `API_KEY` | OpenAI API の キー |
