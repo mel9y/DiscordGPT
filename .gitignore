@@ -1,0 +1,44 @@
+# Created by https://www.toptal.com/developers/gitignore/api/deno,linux,macos
+# Edit at https://www.toptal.com/developers/gitignore?templates=deno,linux,macos
+
+### Deno ###
+/.idea/
+
+# VSCode の Deno 拡張機能用の設定があるため
+# /.vscode/
+
+/node_modules
+
+.env
+*.orig
+*.pyc
+*.swp
+
+### Linux ###
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+### macOS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### macOS Patch ###
+*.icloud

@@ -1,0 +1,18 @@
+name: deno lint
+
+on: pull_request
+
+jobs:
+  fmt:
+    name: deno lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Run lint
+        run: deno lint

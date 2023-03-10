@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "strict": true,
+    "lib": ["deno.window"]
+  },
+  "fmt": {
+    "files": {
+      "include": ["src/"],
+      "exclude": ["src/testdata/"]
+    },
+    "options": {
+      "useTabs": false,
+      "indentWidth": 2,
+      "singleQuote": true,
+      "proseWrap": "always"
+    }
+  },
+  "lint": {
+    "files": {
+      "include": ["src/"]
+    },
+    "rules": {
+      "tags": ["recommended"],
+      "include": ["ban-untagged-todo"]
+    }
+  },
+  "tasks": {
+    "start": "deno run src/mod.ts",
+    "dev": "deno run --watch src/mod.ts",
+    "fmt": "deno fmt --watch src/",
+    "fmt:check": "deno fmt --check",
+    "lint": "deno lint",
+    "lint:json": "deno lint --json",
+    "cache": "deno cache deps.ts"
+  }
+}
