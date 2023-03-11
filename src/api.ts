@@ -1,11 +1,13 @@
 import { getEnv } from './utils.ts';
 
+export type Role = 'user' | 'system' | 'assistant';
+
 export type ChatMessage = {
-  role: 'user' | 'system' | 'assistant';
+  role: Role;
   content: string;
 };
 
-export const ChatCompletion = async (
+const ChatCompletion = async (
   messages: ChatMessage[],
 ): Promise<ChatMessage | undefined> => {
   const res = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -23,3 +25,27 @@ export const ChatCompletion = async (
   const choice = 0;
   return res.choices[choice].message;
 };
+
+export async function createChatReply(
+  content: string,
+  settingText = '',
+  role: Role = 'user',
+) {
+  const messages: ChatMessage[] = [
+    {
+      role: role,
+      content: content,
+    },
+    {
+      role: 'system',
+      content: settingText,
+    },
+  ];
+
+  const res = await ChatCompletion(messages);
+  if (!res) {
+    throw new Error('APIからの応答がありませんでした。');
+  }
+
+  return res.content;
+}
