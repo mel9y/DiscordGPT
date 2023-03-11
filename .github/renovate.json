@@ -1,0 +1,17 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>mel9y/renovate.config"
+  ],
+  "enabledManagers": ["github-actions", "dockerfile", "docker-compose"],
+  "packageRules": [
+    {
+      "matchDatasources": ["github-actions"],
+      "labels": ["R-Update(gh-actions)"]
+    },
+    {
+      "matchDatasources": ["dockerfile", "docker-compose"],
+      "labels": ["R-Update(docker)"]
+    }
+  ]
+}
