@@ -2,3 +2,4 @@ import_map.json
 .env
 .github
 .vscode
+.env.example

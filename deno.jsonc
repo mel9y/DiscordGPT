@@ -13,7 +13,8 @@
       "useTabs": false,
       "indentWidth": 2,
       "singleQuote": true,
-      "proseWrap": "always"
+      "proseWrap": "always",
+      "semiColons": true
     }
   },
   "lint": {
@@ -28,6 +29,7 @@
   "tasks": {
     "start": "deno run --allow-env --allow-read=.env,.env.defaults,.env.example --allow-net=discord.com,gateway.discord.gg,api.openai.com src/mod.ts",
     "dev": "deno run --watch --allow-env --allow-read=.env,.env.defaults,.env.example --allow-net=discord.com,gateway.discord.gg,api.openai.com src/mod.ts",
+    "compile": "deno compile --output=app --allow-env --allow-read=.env,.env.defaults,.env.example --allow-net=discord.com,gateway.discord.gg,api.openai.com src/mod.ts",
     "fmt": "deno fmt --watch src/",
     "fmt:check": "deno fmt --check",
     "lint": "deno lint",
