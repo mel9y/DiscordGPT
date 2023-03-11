@@ -13,7 +13,8 @@
       "useTabs": false,
       "indentWidth": 2,
       "singleQuote": true,
-      "proseWrap": "always"
+      "proseWrap": "always",
+      "semiColons": true
     }
   },
   "lint": {
