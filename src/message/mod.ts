@@ -10,6 +10,7 @@ export async function chatAi(self: Bot, content: string, ids: Ids) {
 
   if (chatMessage.length > 200) {
     await reply(self.helpers, ids, '文字数オーバーです。', undefined, true);
+    return;
   }
 
   // ChatGPT の思考中であることがわかるようにする
