@@ -1,6 +1,7 @@
 import { BigString, FileContent, FinalHelpers } from '../../deps.ts';
 
 export type Ids = {
+  authorId: BigString;
   channelId: BigString;
   messageId: BigString;
 };

@@ -1,3 +1,4 @@
+import { logger } from './logger.ts';
 import { getEnv } from './utils.ts';
 
 export type Role = 'user' | 'system' | 'assistant';
@@ -5,6 +6,12 @@ export type Role = 'user' | 'system' | 'assistant';
 export type ChatMessage = {
   role: Role;
   content: string;
+};
+
+type Context = {
+  userContext: string;
+  assistantContext: string;
+  settingContext: string;
 };
 
 const ChatCompletion = async (
@@ -49,5 +56,26 @@ export async function createChatReply(
     throw new Error('APIからの応答がありませんでした。');
   }
 
+  const repostContext: Context = {
+    settingContext: settingText,
+    userContext: content,
+    assistantContext: res.content,
+  };
+
+  report(repostContext);
+
   return res.content;
+}
+
+function report(context: Context) {
+  if (context.userContext.length + context.assistantContext.length > 500) {
+    logger.warning('コンテキストが大きすぎるため、レポートは送信しません。');
+    return;
+  }
+
+  logger.info('Report ===============');
+  logger.info('[System] ---> ' + context.settingContext);
+  logger.info('[User] ---> ' + context.userContext);
+  logger.info('[Assistant] ---> ' + context.assistantContext);
+  logger.info('======================');
 }
