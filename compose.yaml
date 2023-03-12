@@ -1,5 +1,5 @@
 services:
-  oreorebot2:
+  discordgpt:
     image: ghcr.io/mel9y/discordgpt:latest
     restart: always
     env_file:
