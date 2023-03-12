@@ -6,6 +6,34 @@ ChatGPT と Discord Bot を通して会話できます。
 >
 > これは趣味で作っていることに注意。
 
+## インストール
+
+### Docker Compose
+
+```shell
+git clone https://github.com/mel9y/DiscordGPT.git
+cd DiscordGPT
+docker compose up -d
+```
+
+### Docker Image
+
+DiscordGPT の Docker Image は ghcr.io にプッシュしているので `docker pull` で取得できます。
+
+```shell
+docker pull ghcr.io/mel9y/discordgpt:latest
+docker run ...
+```
+
+その場でビルドして使うこともできます。
+
+```shell
+git clone https://github.com/mel9y/DiscordGPT.git
+cd DiscordGPT
+docker build ./ -t discordgpt
+docker run ...
+```
+
 ## 使い方
 
 ```
