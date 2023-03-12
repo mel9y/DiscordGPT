@@ -4,8 +4,14 @@ import { createChatReply } from '../api.ts';
 import { createTextfile } from './attachment.ts';
 
 export async function chatAi(helpers: FinalHelpers, content: string, ids: Ids) {
+  let settingContext = '';
   const args = content.split(' ');
   args.shift();
+
+  if (args[0] === '-s') {
+    settingContext = args[1];
+    args.splice(args.indexOf('-s'), 1);
+  }
 
   const chatMessage = args.join();
 
@@ -17,7 +23,7 @@ export async function chatAi(helpers: FinalHelpers, content: string, ids: Ids) {
   // ChatGPT の思考中であることがわかるようにする
   const anserReply = await reply(helpers, ids, '*思考中.....*');
 
-  const anser = await createChatReply(chatMessage);
+  const anser = await createChatReply(chatMessage, settingContext);
   // 2000文字以上は Discord API の仕様上、送信できないため。
   if (anser.length > 2000) {
     await reply(
