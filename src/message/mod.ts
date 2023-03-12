@@ -16,9 +16,9 @@ export async function chatAi(helpers: FinalHelpers, content: string, ids: Ids) {
 
   const chatMessage = args.join();
 
-  if (chatMessage.length > 200) {
+  if (chatMessage.length > 200 || settingContext.length > 100) {
     logger.warning(
-      `ID: [${ids.authorId}] のリクエストを却下しました (文字数制限:チャットメッセージ)`,
+      `ID: [${ids.authorId}] のリクエストを却下しました (文字数制限)`,
     );
     await reply(helpers, ids, '文字数オーバーです', undefined, true);
     return;
