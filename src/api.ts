@@ -59,7 +59,7 @@ export async function createChatReply(
   const repostContext: Context = {
     settingContext: settingText,
     userContext: content,
-    assistantContext: res.content
+    assistantContext: res.content,
   };
 
   report(repostContext);
