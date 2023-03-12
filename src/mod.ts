@@ -28,7 +28,7 @@ const client = createBot({
         channelId: msg.channelId,
       };
 
-      await chatAi(self, content, ids);
+      await chatAi(self.helpers, content, ids);
     },
   },
 });
