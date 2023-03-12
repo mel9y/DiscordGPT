@@ -32,13 +32,15 @@ export async function createChatReply(
   role: Role = 'user',
 ) {
   const messages: ChatMessage[] = [
-    {
-      role: role,
-      content: content,
-    },
+    // role 'system' は常に上に設定しておく必要があるとのこと
+    // https://discord.com/channels/974519864045756446/1084115275940647012/1084124811732713583
     {
       role: 'system',
       content: settingText,
+    },
+    {
+      role: role,
+      content: content,
     },
   ];
 
