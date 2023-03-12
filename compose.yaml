@@ -1,0 +1,6 @@
+services:
+  oreorebot2:
+    image: ghcr.io/mel9y/discordgpt:latest
+    restart: always
+    env_file:
+      - .env
