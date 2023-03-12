@@ -1,4 +1,5 @@
 import { createBot, type GatewayIntents, Intents, startBot } from '../deps.ts';
+import { logger } from './logger.ts';
 import { chatAi } from './message/mod.ts';
 import { getEnv } from './utils.ts';
 import { Ids } from './message/api.ts';
@@ -11,7 +12,7 @@ const client = createBot({
   intents: intent,
   events: {
     ready() {
-      console.log('Successfully connected to gateway');
+      logger.info('Successfully connected to gateway');
     },
     async messageCreate(self, msg) {
       if (msg.isFromBot || msg.guildId == undefined) {
@@ -24,6 +25,7 @@ const client = createBot({
       ) return;
 
       const ids: Ids = {
+        authorId: msg.authorId,
         messageId: msg.id,
         channelId: msg.channelId,
       };
