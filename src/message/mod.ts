@@ -18,24 +18,27 @@ export async function chatAi(helpers: FinalHelpers, content: string, ids: Ids) {
 
   if (chatMessage.length > 200) {
     logger.warning(
-      `${ids.authorId} が 200文字 以上のリクエストを送信しようとしました`,
+      `ID: [${ids.authorId}] のリクエストを却下しました (文字数制限:チャットメッセージ)`,
     );
-    await reply(helpers, ids, '文字数オーバーです。', undefined, true);
+    await reply(helpers, ids, '文字数オーバーです', undefined, true);
     return;
   }
 
   // ChatGPT の思考中であることがわかるようにする
-  logger.info(`${ids.authorId} がリクエストを送信しました`);
+  logger.info(`ID: [${ids.authorId}] のリクエストを承認しました`);
   const anserReply = await reply(helpers, ids, '*思考中.....*');
 
   const anser = await createChatReply(chatMessage, settingContext);
-  // 2000文字以上は Discord API の仕様上、送信できないため。
+  // 2000文字以上は Discord API の仕様上、送信できないため
   if (anser.length > 2000) {
+    logger.warning(
+      `ID: [${ids.authorId}] のリクエストの処理が完了しました (2000文字超過)`,
+    );
     await reply(
       helpers,
       ids,
-      'ChatGPT からの回答が2000文字を超過しました。\n' +
-        'Discord API の仕様上、 2000文字以上のメッセージは送信できないため、テキストファイルとして送信します。',
+      'ChatGPT からの回答が2000文字を超過しました\n' +
+        'Discord API の仕様上、 2000文字以上のメッセージは送信できないため、テキストファイルとして送信します',
       createTextfile(anser),
     );
     return;
@@ -43,6 +46,6 @@ export async function chatAi(helpers: FinalHelpers, content: string, ids: Ids) {
 
   await editReply(helpers, ids.channelId, anserReply.id, anser);
   logger.info(
-    `${ids.authorId} のリクエストを処理しました`,
+    `ID: [${ids.authorId}] のリクエストの処理が完了しました`,
   );
 }
